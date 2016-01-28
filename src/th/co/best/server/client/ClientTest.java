@@ -22,7 +22,7 @@ import java.util.Scanner;
 public class ClientTest {
 
     public static void main(String[] args) throws IOException {
-        Socket socket = new Socket("localhost", 3333);
+        Socket socket = new Socket("192.168.1.120", 9090);
         String modifierSentence = null;
         while (true) {
 
@@ -34,9 +34,9 @@ public class ClientTest {
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Input Path File : ");
-            fileName = scanner.nextLine();
-
+//            System.out.print("Input Path File : ");
+//            fileName = scanner.nextLine();
+            fileName = "/Users/engineer/Desktop/test.txt";
             System.out.println(fileName);
             dataOutputStream.writeBytes(fileName + "\n");
             modifierSentence = bufferedReader.readLine();
@@ -44,16 +44,14 @@ public class ClientTest {
 
             File file = new File(fileName);
             System.out.println(file);
-            System.out.println("th.co.best.server.client.ClientTest.main()");
             DataInputStream dataInputStream = new DataInputStream(new FileInputStream(file));
-
-            System.out.println("th.co.best.server.client.ClientTest.main()");
             System.out.println();
             byte[] buffer = new byte[512];
             int len = -1;
             while ((len = dataInputStream.read(buffer)) != -1) {
                 dataOutputStream.write(buffer, 0, len);
             }
+            System.out.println("Upload File Success...");
         }
     }
 }
