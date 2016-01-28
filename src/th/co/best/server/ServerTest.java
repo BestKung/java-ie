@@ -33,14 +33,18 @@ public class ServerTest {
                 BufferedReader fromClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
 
+
                 String fileName = fromClient.readLine();
+
                 System.out.println(fileName);
                 System.out.println("Accept filenname \n");
                 outputStream.writeBytes("Request Complete \n");
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+
                 String sName[] = fileName.split("/");
                 fileName = sName[sName.length-1];
                 fileName = "/Users/engineer/Documents/"+fileName;
+
                 System.out.println("Before file"+fileName);
                 File file = new File(fileName);
                 DataOutputStream outputStream1 = new DataOutputStream(new FileOutputStream(file));
