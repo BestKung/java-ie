@@ -23,7 +23,7 @@ import java.util.Scanner;
 public class ServerTest {
 
     public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(3333);
+        ServerSocket serverSocket = new ServerSocket(9091);
         Socket socket = null;
 
         try {
@@ -43,7 +43,7 @@ public class ServerTest {
 
                 String sName[] = fileName.split("/");
                 fileName = sName[sName.length-1];
-                fileName = "/Users/engineer/Documents/"+fileName;
+                fileName = "F:\\"+fileName;
 
                 System.out.println("Before file"+fileName);
                 File file = new File(fileName);
