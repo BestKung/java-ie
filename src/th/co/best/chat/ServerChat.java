@@ -45,7 +45,8 @@ public class ServerChat {
 
                 if (message.charAt(0) == 'f' && message.length() == 1) {
                     String fileName = received.readLine();
-                    fileName = "F:\\" + fileName.substring(3);
+                    System.out.println(fileName);
+                    fileName = "F:\\" + findName(fileName);
                     System.out.println("File Upload From client : " + fileName);
                     File file = new File(fileName);
 
@@ -79,10 +80,25 @@ public class ServerChat {
                         send.write(buffer, 0, len);
                     }
                     System.out.println("Success");
-                    continue;
+                    break;
                 }
-                   continue;
+                  
             }
         }
     }
+    
+       private static String findName(String fileName) {
+
+        String name = "";
+        for (int i = 0; i < fileName.length() ; i++) {
+            char c = fileName.charAt(i);
+            if (c == '\\') {
+                name = "";
+                continue;
+            }
+            name += c;
+        }
+        return name;
+    }
+    
 }

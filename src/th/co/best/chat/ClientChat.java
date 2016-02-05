@@ -58,10 +58,10 @@ public class ClientChat {
                 }
                 received = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 message = received.readLine();
-                
+
                 if (message.charAt(0) == 'f' && message.length() == 1) {
                     String fileName = received.readLine();
-                    fileName = "F:\\" + fileName.substring(3);
+                    fileName = "F:\\" + findName(fileName);
                     System.out.println("File Upload From client : " + fileName);
                     File file = new File(fileName);
 
@@ -78,10 +78,25 @@ public class ClientChat {
                     continue;
                 }
                 System.out.println("From Server : " + message);
-                continue;
+
             }
 
         } catch (Exception e) {
         }
     }
+
+    private static String findName(String fileName) {
+
+        String name = "";
+        for (int i = 0; i < fileName.length(); i++) {
+            char c = name.charAt(i);
+            if (c == '\\') {
+                name = "";
+                continue;
+            }
+            name += c;
+        }
+        return name;
+    }
+
 }
