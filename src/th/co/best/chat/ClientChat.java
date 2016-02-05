@@ -23,7 +23,8 @@ import java.util.Scanner;
 public class ClientChat {
 
     public static void main(String[] args) throws IOException {
-        
+        try {
+            
             Socket socket = new Socket("localhost", 2000);
             DataOutputStream send = null;
             DataInputStream inputFile = null;
@@ -80,6 +81,8 @@ public class ClientChat {
                 System.out.println("From Server : " + message);
 
             }
+        } catch (Exception e) {
+        }
     }
 
     private static String findName(String fileName) {

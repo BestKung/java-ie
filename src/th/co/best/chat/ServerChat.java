@@ -24,7 +24,8 @@ import java.util.Scanner;
 public class ServerChat {
 
     public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(2000);
+        try {
+             ServerSocket serverSocket = new ServerSocket(2000);
         Socket socket = null;
         DataOutputStream send = null;
         BufferedReader received = null;
@@ -43,30 +44,36 @@ public class ServerChat {
                 send = new DataOutputStream(socket.getOutputStream());
                 message = received.readLine();
 
-                if (message.charAt(0) == 'f' && message.length() == 1) {
-                    String fileName = received.readLine();
-                    System.out.println(fileName);
-                    fileName = "F:\\" + findName(fileName);
-                    System.out.println("File Upload From client : " + fileName);
-                    File file = new File(fileName);
+                if (message != null || !"".equals(message)) {
+                    if (message.charAt(0) == 'f' && message.length() == 1) {
+                        String fileName = received.readLine();
+                        System.out.println(fileName);
+                        fileName = "F:\\" + findName(fileName);
+                        System.out.println("File Upload From client : " + fileName);
+                        File file = new File(fileName);
 
-                    send = new DataOutputStream(new FileOutputStream(file));
-                    DataOutputStream saveFile = new DataOutputStream(new FileOutputStream(file));
-                    byte[] buffer = new byte[7000];
-                    int len = -1;
+                        send = new DataOutputStream(new FileOutputStream(file));
+                        DataOutputStream saveFile = new DataOutputStream(new FileOutputStream(file));
+                        byte[] buffer = new byte[7000];
+                        int len = -1;
 
-                    while ((len = dataInputStream.read(buffer)) != -1) {
-                        saveFile.write(buffer, 0, len);
-                        break;
+                        while ((len = dataInputStream.read(buffer)) != -1) {
+                            saveFile.write(buffer, 0, len);
+                            break;
+                        }
+                        System.out.println("Success");
+                        dataInputStream.close();
+                        continue;
                     }
-                    System.out.println("Success");
-                    continue;
+
                 }
+
                 System.out.println("From Client : " + message);
                 System.out.print("Input Message : ");
                 scanner = new Scanner(System.in);
                 String txt = scanner.nextLine();
                 send.writeBytes(txt + "\n");
+
                 if (txt.equals("f")) {
                     Scanner scanFile = new Scanner(System.in);
                     System.out.print("Upload file : ");
@@ -82,15 +89,17 @@ public class ServerChat {
                     System.out.println("Success");
                     continue;
                 }
-                  
+
             }
         }
+        } catch (Exception e) {
+        }
     }
-    
-       private static String findName(String fileName) {
+
+    private static String findName(String fileName) {
 
         String name = "";
-        for (int i = 0; i < fileName.length() ; i++) {
+        for (int i = 0; i < fileName.length(); i++) {
             char c = fileName.charAt(i);
             if (c == '\\') {
                 name = "";
@@ -100,5 +109,5 @@ public class ServerChat {
         }
         return name;
     }
-    
+
 }
