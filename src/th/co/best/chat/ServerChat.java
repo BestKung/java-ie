@@ -80,7 +80,7 @@ public class ServerChat {
                         send.write(buffer, 0, len);
                     }
                     System.out.println("Success");
-                    break;
+                    continue;
                 }
                   
             }
