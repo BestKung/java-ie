@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,18 +24,19 @@ import java.util.Scanner;
 public class ServerChat {
 
     public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(1999);
+        ServerSocket serverSocket = new ServerSocket(2000);
         Socket socket = null;
         DataOutputStream send = null;
         BufferedReader received = null;
         String message = null;
         Scanner scanner = null;
-
+        DataInputStream inputFile = null;
         while (true) {
             socket = serverSocket.accept();
             if (socket.isConnected()) {
                 System.out.println("Client Accept!");
             }
+            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
             System.out.println("If You want to send file please input \'f\' \n==========================================================================");
             received = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             while (true) {
@@ -46,17 +48,40 @@ public class ServerChat {
                     fileName = "F:\\" + fileName.substring(3);
                     System.out.println("File Upload From client : " + fileName);
                     File file = new File(fileName);
+
                     send = new DataOutputStream(new FileOutputStream(file));
                     DataOutputStream saveFile = new DataOutputStream(new FileOutputStream(file));
+                    byte[] buffer = new byte[7000];
+                    int len = -1;
+
+                    while ((len = dataInputStream.read(buffer)) != -1) {
+                        saveFile.write(buffer, 0, len);
+                        break;
+                    }
                     System.out.println("Success");
                     continue;
-
                 }
                 System.out.println("From Client : " + message);
                 System.out.print("Input Message : ");
                 scanner = new Scanner(System.in);
                 String txt = scanner.nextLine();
                 send.writeBytes(txt + "\n");
+                if (txt.equals("f")) {
+                    Scanner scanFile = new Scanner(System.in);
+                    System.out.print("Upload file : ");
+                    String fileName = scanFile.nextLine();
+                    send.writeBytes(fileName + "\n");
+                    File file = new File(fileName);
+                    inputFile = new DataInputStream(new FileInputStream(file));
+                    byte[] buffer = new byte[1024];
+                    int len = -1;
+                    while ((len = inputFile.read(buffer)) != -1) {
+                        send.write(buffer, 0, len);
+                    }
+                    System.out.println("Success");
+                    continue;
+                }
+                   continue;
             }
         }
     }

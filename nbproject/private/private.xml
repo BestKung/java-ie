@@ -5,6 +5,10 @@
         <group>
             <file>file:/C:/java-ie/src/th/co/best/server/ServerTest.java</file>
             <file>file:/C:/java-ie/src/th/co/best/server/client/ClientTest.java</file>
+            <file>file:/C:/java-ie/src/th/co/best/thread/ServerChat.java</file>
+            <file>file:/C:/java-ie/src/th/co/best/chat/ServerChat.java</file>
+            <file>file:/C:/java-ie/src/th/co/best/thread/ClientChat.java</file>
+            <file>file:/C:/java-ie/src/th/co/best/chat/ClientChat.java</file>
         </group>
     </open-files>
 </project-private>

@@ -34,9 +34,9 @@ public class ClientTest {
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             Scanner scanner = new Scanner(System.in);
-//            System.out.print("Input Path File : ");
-//            fileName = scanner.nextLine();
-            fileName = "E://test.txt";
+            System.out.print("Input Path File : ");
+            fileName = scanner.nextLine();
+//            fileName = "E://test.txt";
             System.out.println(fileName);
             dataOutputStream.writeBytes(fileName + "\n");
 

@@ -41,24 +41,23 @@ public class ServerTest {
                 outputStream.writeBytes("Request Complete \n");
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
 
-                String sName[] = fileName.split("/");
+                String sName[] = fileName.split("\\\\");
                 fileName = sName[sName.length-1];
                 fileName = "F:\\"+fileName;
 
                 System.out.println("Before file"+fileName);
                 File file = new File(fileName);
                 DataOutputStream outputStream1 = new DataOutputStream(new FileOutputStream(file));
-
+                
                 byte[] buffer = new byte[4096];
                 int len = -1;
                 while ((len = dataInputStream.read(buffer)) != -1) {
                     outputStream1.write(buffer, 0, len);
                 }
+                System.out.println("Success");
             }
         } catch (Exception e) {
-        } finally {
-            socket.close();
-            
-        }
+            e.printStackTrace();
+        } 
     }
 }
