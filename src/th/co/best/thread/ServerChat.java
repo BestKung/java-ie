@@ -63,7 +63,7 @@ public class ServerChat implements Runnable {
                     Scanner scanner = new Scanner(System.in);
                     input = scanner.nextLine();
                     send.writeBytes(input + "\n");
-                    if (input.equals("f") || input.equals("F")) {
+                    if (input.equalsIgnoreCase("f")) {
                         System.out.print("Upload file : ");
                         String fileName = scanner.nextLine();
                         send.writeBytes(fileName + "\n");

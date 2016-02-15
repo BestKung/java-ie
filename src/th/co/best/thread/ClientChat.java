@@ -33,6 +33,7 @@ public class ClientChat implements Runnable {
         showMessage = new Thread(this);
         sendMessage = new Thread(this);
         socket = new Socket(ip, port);
+        inputFile = new DataInputStream(socket.getInputStream());
         sendMessage.start();
         showMessage.start();
     }
@@ -46,7 +47,7 @@ public class ClientChat implements Runnable {
                     Scanner scanner = new Scanner(System.in);
                     input = scanner.nextLine();
                     send.writeBytes(input + "\n");
-                    if (input.equals("f") || input.equals("F")) {
+                    if (input.equalsIgnoreCase("f")) {
                         System.out.print("Upload file : ");
                         String fileName = scanner.nextLine();
                         send.writeBytes(fileName + "\n");
