@@ -21,10 +21,10 @@ import java.util.Scanner;
  * @author BestKung
  */
 public class ClientChat {
+//192.168.10.210
 
     public static void main(String[] args) throws IOException {
         try {
-            
             Socket socket = new Socket("localhost", 2000);
             DataOutputStream send = null;
             DataInputStream inputFile = null;
@@ -53,6 +53,7 @@ public class ClientChat {
                     int len = -1;
                     while ((len = inputFile.read(buffer)) != -1) {
                         send.write(buffer, 0, len);
+                        break;
                     }
                     System.out.println("Success");
                     continue;
@@ -68,12 +69,12 @@ public class ClientChat {
 
                     send = new DataOutputStream(new FileOutputStream(file));
                     DataOutputStream saveFile = new DataOutputStream(new FileOutputStream(file));
-                    byte[] buffer = new byte[7000];
+                    byte[] buffer = new byte[512];
                     int len = -1;
 
                     while ((len = dataInputStream.read(buffer)) != -1) {
                         saveFile.write(buffer, 0, len);
-                        break;
+//                            break;
                     }
                     System.out.println("Success");
                     continue;
