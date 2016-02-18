@@ -117,10 +117,11 @@ public class ServerGui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSend, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnImage, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtInput, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSend, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnImage, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -140,7 +141,6 @@ public class ServerGui extends javax.swing.JFrame {
             StyleConstants.setBackground(style, Color.decode("#fff176"));
             StyleConstants.setBold(style, true);
             doc.insertString(doc.getLength(), "\n" + sendMessage, style);
-//            txtShow.setText(txtShow.getText().trim() + "\n" + sendMessage);
             send.writeUTF(sendMessage + "\n");
         } catch (IOException ex) {
             Logger.getLogger(ClientGui.class.getName()).log(Level.SEVERE, null, ex);
@@ -161,7 +161,6 @@ public class ServerGui extends javax.swing.JFrame {
                 StyleConstants.setBackground(style, Color.decode("#fff176"));
                 StyleConstants.setBold(style, true);
                 doc.insertString(doc.getLength(), "\n" + new ManageFile().sendFile(path, inputFile, send), style);
-//                txtShow.setText(txtShow.getText().trim() + "\n" + new ManageFile().sendFile(path, inputFile, send));
             } catch (IOException ex) {
                 Logger.getLogger(ServerGui.class.getName()).log(Level.SEVERE, null, ex);
             } catch (BadLocationException ex) {
@@ -185,7 +184,6 @@ public class ServerGui extends javax.swing.JFrame {
                 StyleConstants.setBackground(style, Color.decode("#fff176"));
                 StyleConstants.setBold(style, true);
                 doc.insertString(doc.getLength(), "\n" + sendMessage, style);
-//                txtShow.setText(txtShow.getText().trim() + "\n" + sendMessage);
                 send.writeUTF(sendMessage + "\n");
             } catch (IOException ex) {
                 Logger.getLogger(ClientGui.class.getName()).log(Level.SEVERE, null, ex);
@@ -242,7 +240,7 @@ public class ServerGui extends javax.swing.JFrame {
             message = resived.readLine();
             if (message.equals("file")) {
                 String fileName = resived.readLine();
-                fileName = "F:\\" + new ManageFile().findName(fileName);
+                fileName = "/Users/engineer/Desktop/tmpFile/" + new ManageFile().findName(fileName);
                 System.out.println(new ManageFile().reseivedFile(fileName, send, inputFile));
                 if ((fileName.substring(fileName.length() - 3, fileName.length()).equalsIgnoreCase("jpg")) || (fileName.substring(fileName.length() - 3, fileName.length()).equalsIgnoreCase("png"))) {
                     FromDialogShowImage dialogShowImage = new FromDialogShowImage(fileName);
@@ -250,12 +248,10 @@ public class ServerGui extends javax.swing.JFrame {
                     StyleConstants.setBackground(style, Color.decode("#80deea"));
                     StyleConstants.setBold(style, true);
                     doc.insertString(doc.getLength(), "\n Server : ได้รับรูป ", style);
-//                    txtShow.setText(txtShow.getText().trim() + "\n" + "Server : ได้รับรูป");
                 } else {
                     StyleConstants.setBackground(style, Color.decode("#80deea"));
                     StyleConstants.setBold(style, true);
                     doc.insertString(doc.getLength(), "\n Server : ได้รับไฟล์จาก ", style);
-//                    txtShow.setText(txtShow.getText().trim() + "\n" + "Server : ได้รับไฟล์");
                 }
                 continue;
             }
@@ -263,7 +259,6 @@ public class ServerGui extends javax.swing.JFrame {
             StyleConstants.setBackground(style, Color.decode("#80deea"));
             StyleConstants.setBold(style, true);
             doc.insertString(doc.getLength(), "\n Server : " + message, style);
-//            txtShow.setText(txtShow.getText().trim() + "\n" + message);
         }
     }
 

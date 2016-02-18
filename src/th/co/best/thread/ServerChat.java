@@ -79,7 +79,7 @@ public class ServerChat implements Runnable {
                     if ((output.charAt(0) == 'f' || output.charAt(0) == 'F') && output.length() == 1) {
                         String fileName = reseived.readLine();
                         System.out.println(fileName);
-                        fileName = "F:\\" + new ManageFile().findName(fileName);
+                        fileName = "/Users/engineer/Desktop/tmpFile/" + new ManageFile().findName(fileName);
                         System.out.println("File Upload From client : " + fileName);
                         System.out.println(new ManageFile().reseivedFile(fileName, send, inputFile));
 

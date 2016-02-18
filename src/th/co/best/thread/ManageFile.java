@@ -54,7 +54,7 @@ public class ManageFile {
         String name = "";
         for (int i = 0; i < fileName.length(); i++) {
             char c = fileName.charAt(i);
-            if (c == '\\') {
+            if (c == '/') {
                 name = "";
                 continue;
             }
