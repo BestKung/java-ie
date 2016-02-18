@@ -24,13 +24,15 @@ public class ClientTest {
     public static void main(String[] args) throws IOException {
         Socket socket = new Socket("localhost", 3333);
         String modifierSentence = null;
-        while (true) {
-
+        BufferedReader bufferedReader = null;
+        DataOutputStream dataOutputStream = null;
+        DataInputStream dataInputStream = null;
+        
+        try {
+             while (true) {
             String fileName = "";
-            BufferedReader bufferedReader = null;
-            DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            dataOutputStream = new DataOutputStream(socket.getOutputStream());
             System.out.println("Upload File.");
-
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             Scanner scanner = new Scanner(System.in);
@@ -42,10 +44,25 @@ public class ClientTest {
             modifierSentence = bufferedReader.readLine();
             System.out.println("From Server" + modifierSentence);
 
+         
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             File file = new File(fileName);
             System.out.println(file);
             System.out.println("th.co.best.server.client.ClientTest.main()");
-            DataInputStream dataInputStream = new DataInputStream(new FileInputStream(file));
+            dataInputStream = new DataInputStream(new FileInputStream(file));
 
             System.out.println("th.co.best.server.client.ClientTest.main()");
             System.out.println();
@@ -54,6 +71,12 @@ public class ClientTest {
             while ((len = dataInputStream.read(buffer)) != -1) {
                 dataOutputStream.write(buffer, 0, len);
             }
+        }
+        } finally{
+            socket.close();
+        bufferedReader.close();
+        dataInputStream.close();
+        dataOutputStream.close();
         }
     }
 }

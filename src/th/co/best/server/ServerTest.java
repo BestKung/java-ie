@@ -25,23 +25,26 @@ public class ServerTest {
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = new ServerSocket(3333);
         Socket socket = null;
-
+        DataOutputStream outputStream = null;
+        DataInputStream dataInputStream = null;
+        DataOutputStream outputStream1 = null;
+        BufferedReader fromClient = null;
         try {
             while (true) {
                 socket = serverSocket.accept();
                 System.out.println("Client Accept.!");
-                BufferedReader fromClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+                fromClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                outputStream = new DataOutputStream(socket.getOutputStream());
 
-                String fileName = (fromClient.readLine()).substring(3);
+                String fileName = (fromClient.readLine());
                 System.out.println(fileName);
                 System.out.println("Accept filenname \n");
                 outputStream.writeBytes("Request Complete \n");
-                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-                fileName = "F:\\"+fileName;
-                System.out.println("Before file"+fileName);
+                dataInputStream = new DataInputStream(socket.getInputStream());
+                fileName = "F:\\" + fileName.substring(3);
+                System.out.println("Before file" + fileName);
                 File file = new File(fileName);
-                DataOutputStream outputStream1 = new DataOutputStream(new FileOutputStream(file));
+                outputStream1 = new DataOutputStream(new FileOutputStream(file));
 
                 byte[] buffer = new byte[4096];
                 int len = -1;
@@ -52,7 +55,10 @@ public class ServerTest {
         } catch (Exception e) {
         } finally {
             socket.close();
-            
+            outputStream.close();
+            dataInputStream.close();
+            outputStream1.close();
+            fromClient.close();
         }
     }
 }
