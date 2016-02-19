@@ -244,7 +244,7 @@ public class ClientGui extends javax.swing.JFrame {
             message = resived.readLine();
             if (message.equals("file")) {
                 String fileName = resived.readLine();
-                fileName = "F:\\" + new ManageFile().findName(fileName);
+                fileName = "/Users/engineer/Desktop/tmpFile/" + new ManageFile().findName(fileName);
                 System.out.println(new ManageFile().reseivedFile(fileName, send, inputFile));
                 if ((fileName.substring(fileName.length() - 3, fileName.length()).equalsIgnoreCase("jpg")) || (fileName.substring(fileName.length() - 3, fileName.length()).equalsIgnoreCase("png"))) {
                     FromDialogShowImage dialogShowImage = new FromDialogShowImage(fileName);

@@ -41,7 +41,7 @@ public class ServerTest {
                 System.out.println("Accept filenname \n");
                 outputStream.writeBytes("Request Complete \n");
                 dataInputStream = new DataInputStream(socket.getInputStream());
-                fileName = "F:\\" + fileName.substring(3);
+                fileName = "/Users/engineer/Desktop/tmpFile/" + findName(fileName);
                 File file = new File(fileName);
                 outputStream1 = new DataOutputStream(new FileOutputStream(file));
                 byte[] buffer = new byte[1024];
@@ -59,5 +59,18 @@ public class ServerTest {
         } catch (Exception e) {
             e.printStackTrace();
         } 
+    }
+    
+     public static String findName(String fileName) {
+        String name = "";
+        for (int i = 0; i < fileName.length(); i++) {
+            char c = fileName.charAt(i);
+            if (c == '/') {
+                name = "";
+                continue;
+            }
+            name += c;
+        }
+        return name;
     }
 }
