@@ -23,7 +23,7 @@ import java.util.Scanner;
 public class ServerTest {
 
     public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(3333);
+        ServerSocket serverSocket = new ServerSocket(9091);
         Socket socket = null;
         DataOutputStream outputStream = null;
         DataInputStream dataInputStream = null;
@@ -44,7 +44,6 @@ public class ServerTest {
                 fileName = "F:\\" + fileName.substring(3);
                 File file = new File(fileName);
                 outputStream1 = new DataOutputStream(new FileOutputStream(file));
-
                 byte[] buffer = new byte[1024];
                 int len = -1;
                 while ((len = dataInputStream.read(buffer)) != 1) {
@@ -58,12 +57,7 @@ public class ServerTest {
             }
 
         } catch (Exception e) {
-        } finally {
-            socket.close();
-            outputStream.close();
-            dataInputStream.close();
-            outputStream1.close();
-            fromClient.close();
-        }
+            e.printStackTrace();
+        } 
     }
 }

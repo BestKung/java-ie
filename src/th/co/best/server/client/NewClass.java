@@ -35,17 +35,27 @@ public class NewClass {
 //        }
 //        }
 //===========================================================================
-        String path = "E:\\test.txt";
-        String b = "";
-        byte[] content = new byte[1024];
-        File file = new File(path);
-        FileReader fileReader = new FileReader(file);
-        System.out.println(file);
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        System.out.println(bufferedReader.readLine());
-        while ((b = bufferedReader.readLine()) != null) {
-            System.out.println(b);
-        }
+//        String path = "E:\\test.txt";
+//        String b = "";
+//        byte[] content = new byte[1024];
+//        File file = new File(path);
+//        FileReader fileReader = new FileReader(file);
+//        System.out.println(file);
+//        BufferedReader bufferedReader = new BufferedReader(fileReader);
+//        System.out.println(bufferedReader.readLine());
+//        while ((b = bufferedReader.readLine()) != null) {
+//            System.out.println(b);
+//        }
+//=============================================================================
+String path  = "ygvsyvfsygfsfg/sukgh/fusef/fhsu/test.txt";
+
+String[] str = path.split("/");
+
+for(String s : str){
+    System.out.println(s);
+}
+
+        System.out.println(str[str.length-1]);
 
     }
 }

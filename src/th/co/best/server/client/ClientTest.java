@@ -22,41 +22,36 @@ import java.util.Scanner;
 public class ClientTest {
 
     public static void main(String[] args) throws IOException {
-        Socket socket = new Socket("localhost", 3333);
+        Socket socket = new Socket("localhost", 9091);
         String modifierSentence = null;
         BufferedReader bufferedReader = null;
         DataOutputStream dataOutputStream = null;
         DataInputStream dataInputStream = null;
         dataOutputStream = new DataOutputStream(socket.getOutputStream());
         bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
         try {
             while (true) {
                 String fileName = "";
-
                 System.out.println("Upload File.");
-
                 Scanner scanner = new Scanner(System.in);
                 System.out.print("Input Path File : ");
                 fileName = scanner.nextLine();
-
                 System.out.println(fileName);
                 dataOutputStream.writeBytes(fileName + "\n");
                 modifierSentence = bufferedReader.readLine();
                 System.out.println("From Server" + modifierSentence);
-
                 File file = new File(fileName);
                 System.out.println(file);
                 dataInputStream = new DataInputStream(new FileInputStream(file));
-
                 byte[] buffer = new byte[1024];
                 int len = -1;
                 while ((len = dataInputStream.read(buffer)) != -1) {
                     dataOutputStream.write(buffer, 0, len);
                 }
             }
-        }catch(Exception e){
-        e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+
         }
     }
 }

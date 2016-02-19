@@ -39,7 +39,7 @@ public class ServerChat implements Runnable {
             InetAddress address = InetAddress.getLocalHost();
             System.out.println("Server open on port number : " + serverSocket.getLocalPort() + " Server IP : " + address);
             System.out.println("...................Server is running......................");
-             System.out.println("If You want to send file please input \'f\' \n==========================================================================");
+            System.out.println("If You want to send file please input \'f\' \n==========================================================================");
             socket = serverSocket.accept();
             inputFile = new DataInputStream(socket.getInputStream());
             if (socket.isConnected()) {

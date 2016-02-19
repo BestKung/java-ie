@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/C:/java-ie/src/th/co/best/thread/ServerChat.java</file>
+            <file>file:/C:/java-ie/src/th/co/best/thread/ClientChat.java</file>
+            <file>file:/C:/java-ie/src/th/co/best/thread/ManageFile.java</file>
+        </group>
+>>>>>>> 694bf7d9955a5c4a3bfefc69340e978748027184
     </open-files>
 </project-private>
