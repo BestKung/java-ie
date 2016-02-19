@@ -27,56 +27,36 @@ public class ClientTest {
         BufferedReader bufferedReader = null;
         DataOutputStream dataOutputStream = null;
         DataInputStream dataInputStream = null;
-        
+        dataOutputStream = new DataOutputStream(socket.getOutputStream());
+        bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
         try {
-             while (true) {
-            String fileName = "";
-            dataOutputStream = new DataOutputStream(socket.getOutputStream());
-            System.out.println("Upload File.");
-            bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            while (true) {
+                String fileName = "";
 
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Input Path File : ");
-            fileName = scanner.nextLine();
+                System.out.println("Upload File.");
 
-            System.out.println(fileName);
-            dataOutputStream.writeBytes(fileName + "\n");
-            modifierSentence = bufferedReader.readLine();
-            System.out.println("From Server" + modifierSentence);
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("Input Path File : ");
+                fileName = scanner.nextLine();
 
-         
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            File file = new File(fileName);
-            System.out.println(file);
-            System.out.println("th.co.best.server.client.ClientTest.main()");
-            dataInputStream = new DataInputStream(new FileInputStream(file));
+                System.out.println(fileName);
+                dataOutputStream.writeBytes(fileName + "\n");
+                modifierSentence = bufferedReader.readLine();
+                System.out.println("From Server" + modifierSentence);
 
-            System.out.println("th.co.best.server.client.ClientTest.main()");
-            System.out.println();
-            byte[] buffer = new byte[512];
-            int len = -1;
-            while ((len = dataInputStream.read(buffer)) != -1) {
-                dataOutputStream.write(buffer, 0, len);
+                File file = new File(fileName);
+                System.out.println(file);
+                dataInputStream = new DataInputStream(new FileInputStream(file));
+
+                byte[] buffer = new byte[1024];
+                int len = -1;
+                while ((len = dataInputStream.read(buffer)) != -1) {
+                    dataOutputStream.write(buffer, 0, len);
+                }
             }
-        }
-        } finally{
-            socket.close();
-        bufferedReader.close();
-        dataInputStream.close();
-        dataOutputStream.close();
+        }catch(Exception e){
+        e.printStackTrace();
         }
     }
 }
